@@ -21,6 +21,8 @@ class Triangle
   def valid_triangle?
     if greater_than_zero? && equal_triangle?
       true
+    else
+      raise TriangleError
     end
   end
 
