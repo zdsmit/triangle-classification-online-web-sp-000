@@ -8,7 +8,7 @@ class Triangle
   end
 
   def kind
-    valid_triangle?
+    validate_triangle
     if @side_1 == @side_2 && @side_2 == @side_3
       :equilateral
     elsif @side_1 == @side_2 || @side_1 == @side_3 || @side_2 == @side_3
@@ -18,24 +18,10 @@ class Triangle
     end
   end
 
-  def valid_triangle?
-    if greater_than_zero? && equal_triangle?
-    end
-  end
-
-  def equal_triangle?
-    if side_1 + side_2 > side_3 && side_1 + side_3 > side_2 && side_2 + side_3 > side_1
-      true
-    else
-      false
-  end
-
-  def greater_than_zero?
-    if side_1 > 0 && side_2 > 0 && side_3 > 0
-      true
-    else
-      false
-    end
+  def validate_triangle
+    real_triangle = [(a + b > c), (a + c > b), (b + c > a)]
+    [a, b, c].each { |s| real_triangle << false if s <= 0 }
+    raise TriangleError if real_triangle.include?(false)
   end
 
   class TriangleError < StandardError
