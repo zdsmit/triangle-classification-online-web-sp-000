@@ -31,6 +31,7 @@ class Triangle
       true
     else
       false
+    end
   end
 
   def greater_than_zero?
